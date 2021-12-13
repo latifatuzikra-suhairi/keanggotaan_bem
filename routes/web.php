@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PendaftaranController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +15,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('landing');
 });
+
+Route::get('/daftar',[PendaftaranController::class, 'index'])->name('daftar'); //index laman pendaftaran
+Route::post('/daftar/store',[PendaftaranController::class, 'store'])->name('daftar.simpan'); //simpan data pendaftaran
