@@ -46,111 +46,70 @@ class PendaftaranController extends Controller
      */
     public function store(Request $request)
     {
-        // $this->validate($request, rules: [
-        //     'id_kepengurusan' => 'required',
-        //     'nama' => 'required|max:50',
-        //     'nim' => 'required',
-        //     'jurusan' => 'required',
-        //     'email' => 'required|email',
-        //     'no_hp' => 'required|max:13',
-        //     'tempat_lahir' => 'required|max:20',
-        //     'tgl_lahir' => 'required|before:today',
-        //     'transkrip' => 'required|mimes:pdf',
-        //     'krs' => 'required|mimes:pdf',
-        //     'foto' => 'required|image|file|max:1000',
-        //     'motto' => 'required',
-        //     'kelebihan' => 'required',
-        //     'kekurangan' => 'required',
-        //     'motivasi' => 'required',
-        //     'id_pilihan_1' => 'required',
-        //     'alasan_pil_1' => 'required',
-        //     'id_pilihan_2' => 'required',
-        //     'alasan_pil_2' => 'required',
-        //     'surat_pernyataan' => 'required|mimes:pdf,doc,docx'
-        // ]);
+        $request->validate([
+            'id_kepengurusan' => 'required',
+            'nama' => 'required|max:50',
+            'nim' => 'required',
+            'jurusan' => 'required',
+            'email' => 'required|email',
+            'no_hp' => 'required|max:13',
+            'tempat_lahir' => 'required|max:20',                
+            'tgl_lahir' => 'required',
+            'transkrip' => 'required|mimes:pdf',
+            'krs' => 'required|mimes:pdf',
+            'foto' => 'required|image|file|max:1024',                
+            'motto' => 'required',
+            'kelebihan' => 'required',
+            'kekurangan' => 'required',
+            'motivasi' => 'required',
+            'id_pilihan_1' => 'required',
+            'alasan_pil_1' => 'required',
+            'id_pilihan_2' => 'required',
+            'alasan_pil_2' => 'required',
+            'surat_pernyataan' => 'required|mimes:pdf,doc,docx',
+        ]);
 
-        // $foto_name = $request->foto->getClientOriginalName();
-        // $request->foto->storeAs('pas-foto', $foto_name);
+        $foto_name = $request->krs->getClientOriginalName() . '-' . time() . '-' . $request->foto->extension();
+        $request->foto->move(public_path('foto'), $foto_name);
 
-        // $krs_name = $request->krs->getClientOriginalName();
-        // $request->krs->storeAs('krs', $krs_name);
+        $krs_name = $request->krs->getClientOriginalName() . '-' . time() . '-' . $request->krs->extension();
+        $request->krs->move(public_path('krs'), $krs_name);
 
-        // $transkrip_name = $request->transkrip->getClientOriginalName();
-        // $request->transkrip->storeAs('transkrip-nilai', $transkrip_name);
+        $transkrip_name = $request->transkrip->getClientOriginalName() . '-' . time() . '-' . $request->transkrip->extension();
+        $request->transkrip->move(public_path('transkrip'), $transkrip_name);
 
-        // $surat_name = $request->surat_pernyataan->getClientOriginalName();
-        // $request->surat_pernyataan->storeAs('surat-pernyataan', $surat_name);
+        $surat_name = $request->surat_pernyataan->getClientOriginalName() . '-' . time() . '-' . $request->surat_pernyataan->extension();
+        $request->surat_pernyataan->move(public_path('surat-pernyataan'), $surat_name);
 
-        // $status_kelulusan = 0;
-        // $tahun_daftar = date('Y');
+        $status_kelulusan = 0;
+        $tahun_daftar = date('Y');
 
-        // Pendaftaran::create([
-        //     'id_kepengurusan' => $request->id_kepengurusan,
-        //     'nama' => $request->nama,
-        //     'nim' => $request->nim,
-        //     'jurusan' => $request->jurusan,
-        //     'email' => $request->email,
-        //     'no_hp' => $request->no_hp,
-        //     'tempat_lahir' => $request->tempat_lahir,
-        //     'tgl_lahir' => $request->tgl_lahir,
-        //     'motto' => $request->motto,
-        //     'kelebihan' => $request->kelebihan,
-        //     'kekurangan' => $request->kekurangan,
-        //     'motivasi' => $request->motivasi,
-        //     'id_pilihan_1' => $request->id_pilihan_1,
-        //     'alasan_pil_1' => $request->alasan_pil_1,
-        //     'id_pilihan_2' => $request->id_pilihan_2,
-        //     'alasan_pil_2' => $request->alasan_pil_2,
-        //     'status_kelulusan' => $status_kelulusan,
-        //     'tahun_daftar' => $tahun_daftar,
-        //     'foto' => $request->foto,
-        //     'krs' => $request->krs,
-        //     'transkrip' => $request->transkrip,
-        //     'surat_pernyataan' => $request->surat_pernyataan
-        // ]);
-        // $daftar = new Pendaftaran;
-        // $daftar->id_kepengurusan = $request->id_kepengurusan;
-        // $daftar->nama = $request->nama;
-        // $daftar->nim = $request->nim;
-        // $daftar->jurusan = $request->jurusan;
-        // $daftar->email = $request->email;
-        // $daftar->no_hp = $request->no_hp;
-        // $daftar->tempat_lahir = $request->tempat_lahir;
-        // $daftar->tgl_lahir = $request->tgl_lahir;
-        // $daftar->motto = $request->motto;
-        // $daftar->kelebihan = $request->kelebihan;
-        // $daftar->kekurangan = $request->kekurangan;
-        // $daftar->motivasi = $request->motivasi;
-        // $daftar->id_pilihan_1 = $request->id_pilihan_1;
-        // $daftar->id_pilihan_2 = $request->id_pilihan_2;
-        // $daftar->alasan_pil_1 = $request->alasan_pil_1;
-        // $daftar->alasan_pil_2 = $request->alasan_pil_2;
-        // $daftar->status_kelulusan = 0;
-        // $daftar->tahun_daftar = date('Y');
-        
-        // if($request->file('foto')){
-        //     $daftar->foto = $request->file('foto')->store('pas-foto');
-        // }
-        
-        // if($request->file('krs')){
-        //     $daftar->krs = $request->file('krs')->store('krs');
-        // }
+        Pendaftaran::create([
+            'id_kepengurusan' => $request->id_kepengurusan,
+            'nama' => $request->nama,
+            'nim' => $request->nim,
+            'jurusan' => $request->jurusan,
+            'email' => $request->email,
+            'no_hp' => $request->no_hp,
+            'tempat_lahir' => $request->tempat_lahir,
+            'tgl_lahir' => $request->tgl_lahir,
+            'motto' => $request->motto,
+            'kelebihan' => $request->kelebihan,
+            'kekurangan' => $request->kekurangan,
+            'motivasi' => $request->motivasi,
+            'id_pilihan_1' => $request->id_pilihan_1,
+            'alasan_pil_1' => $request->alasan_pil_1,
+            'id_pilihan_2' => $request->id_pilihan_2,
+            'alasan_pil_2' => $request->alasan_pil_2,
+            'status_kelulusan' => $status_kelulusan,
+            'tahun_daftar' => $tahun_daftar,
+            'foto' => $foto_name,
+            'krs' => $krs_name,
+            'transkrip_nilai' => $transkrip_name,
+            'surat_pernyataan' => $surat_name
+        ]);
 
-        // if($request->file('transkrip')){
-        //     $daftar->transkrip = $request->file('transkrip')->store('transkrip-nilai');
-        // }
-
-        // if($request->file('surat_pernyataan')){
-        //     $daftar->surat_pernyataan = $request->file('surat_pernyataan')->store('surat-pernyataan');
-        // }
-
-        // $daftar->save();
-        // Pendaftaran::create($request->all());
-        // // $request->request->add(['user_id' => $user->id]);
-        // // Mahasiswa::create($request->all());
-        //ddd($request);
-        return $request->file('foto')->store('post_images');
-        //return redirect('/landing')->with('success', 'Pendaftaran Berhasil Dilakukan');
+        return redirect('/daftar')->with('success', 'Pendaftaran Berhasil Dilakukan');
     }
 
     /**

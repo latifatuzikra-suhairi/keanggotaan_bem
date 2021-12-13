@@ -153,7 +153,7 @@
             </div>
             <div class="col-md-6">
                <label for="pilihan_1" class="form-label">Pilihan 1 Dinas/Biro</label>
-               <select class="form-select @error('pilihan_1') is-invalid @enderror" aria-label="Default select example" name="pilihan_1">
+               <select class="form-select @error('pilihan_1') is-invalid @enderror" aria-label="Default select example" name="id_pilihan_1">
                   <option value="" selected disabled>Pilih Dinas/Biro</option>
                   @foreach ($dinas_biro as $data)
                   <option value="{{ $data->id_dinasbiro }}">{{ $data->nama_dinasbiro }}</option>
@@ -167,7 +167,7 @@
             </div>
             <div class="col-md-6">
                <label for="pilihan_2" class="form-label">Pilihan 2 Dinas/Biro</label>
-               <select class="form-select @error('pilihan_2') is-invalid @enderror" aria-label="Default select example" name="pilihan_2"> 
+               <select class="form-select @error('pilihan_2') is-invalid @enderror" aria-label="Default select example" name="id_pilihan_2"> 
                   <option value="" selected disabled>Pilih Dinas/Biro</option>
                   @foreach ($dinas_biro as $data)
                   <option value="{{ $data->id_dinasbiro }}">{{ $data->nama_dinasbiro }}</option>
@@ -241,7 +241,7 @@
          </div>
 
             <div class="col-12">
-              <button type="submit" class="btn btn-primary">Sign in</button>
+              <button type="submit" class="btn btn-primary">Daftar</button>
             </div>
           </form>
          </div>
