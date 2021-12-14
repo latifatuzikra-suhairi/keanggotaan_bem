@@ -59,7 +59,7 @@
 
                <ul class="nav nav-pills">
                    <li class="nav-item me-2">
-                       <a href="#" class="nav-link btn-custom rounded shadow" id="btn-login">Sign In</a>
+                       <a href="{{ route('login') }}" class="nav-link btn-custom rounded shadow" id="btn-login">Sign In</a>
                    </li>
                </ul>
 
@@ -86,7 +86,7 @@
                 </p>
                 <p class="mt-2 text-muted">Jadilah bagian dari kami!</p>
                 <div class="d-flex"style="margin-top:-10px">
-                    <a href="{{ route('daftar') }}" class="btn btn-blue px-4 py-1 rounded shadow">Daftar</a>
+                    <a href="{{ route('register') }}" class="btn btn-blue px-4 py-1 rounded shadow">Daftar</a>
                 </div>
 
             </div>

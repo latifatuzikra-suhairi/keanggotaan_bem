@@ -20,3 +20,6 @@ Route::get('/', function () {
 
 Route::get('/daftar',[PendaftaranController::class, 'index'])->name('daftar'); //index laman pendaftaran
 Route::post('/daftar/store',[PendaftaranController::class, 'store'])->name('daftar.simpan'); //simpan data pendaftaran
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
