@@ -1,6 +1,34 @@
 @extends('layouts.app')
 
 @section('content')
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="{{ asset('css/landing.css') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
+
+    {{-- logo fti --}}
+    <link rel="shortcut icon" href="{{ asset('img/logoBEM.png') }}">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <title>BEM KM FTI</title>
+  </head>
+<body>
+<img src="{{ asset('img/header-bg.svg') }}" class="position-absolute top-0 end-0 d-none d-lg-block" style="transform: translateY(-80px); transform: translateX(50px);">
+<img src="{{ asset('img/header-vector(1).svg') }}" width="40%" class="position-absolute img-header top-0 end-0 d-none d-lg-block display-header" style="margin-top:70px">
+{{-- <img src="{{ asset('img/header-vector(1).svg') }}" width="50%" class="display-header"> --}}
+
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -38,30 +66,11 @@
                                 @enderror
                             </div>
                         </div>
-
-                        <div class="row mb-3">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
                         <div class="row mb-0">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Login') }}
                                 </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
                             </div>
                         </div>
                     </form>
@@ -70,4 +79,5 @@
         </div>
     </div>
 </div>
+</body>
 @endsection
