@@ -23,3 +23,11 @@ Route::post('/daftar/store',[PendaftaranController::class, 'store'])->name('daft
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/dashboard', function () {
+    return view('dashboard.beranda');
+});
+
+Route::get('/kepengurusan',[App\Http\Controllers\KepengurusanController::class, 'index'])->name('kepengurusan');
+Route::get('/tambah-kepengurusan',[App\Http\Controllers\KepengurusanController::class, 'create'])->name('tambah-kepengurusan');
+Route::post('/simpan-kepengurusan',[App\Http\Controllers\KepengurusanController::class, 'store'])->name('simpan-kepengurusan');
