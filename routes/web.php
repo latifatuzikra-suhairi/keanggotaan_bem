@@ -16,7 +16,6 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', function () {
     return view('landing');
 });
@@ -25,6 +24,10 @@ Route::get('/daftar',[PendaftaranController::class, 'index'])->name('daftar'); /
 Route::post('/daftar/store',[PendaftaranController::class, 'store'])->name('daftar.simpan'); //simpan data pendaftaran
 
 Auth::routes();
+Auth::routes(['register'=> false, 'reset'=>false]);
+Route::get('/register', function () {
+    abort(404);
+});
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
