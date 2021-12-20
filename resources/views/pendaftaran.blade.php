@@ -31,16 +31,25 @@
         <h3 class="mb-2">Kabinet {{ $kabinet->nama_kabinet }}</h3>
 
         @if(session()->has('success'))
-         <div class="alert alert-success" role="alert">
-            {{ session('success')}}
-         </div>
-        @endif
+            <div class="alert alert-success alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>	
+                     <strong>{{ session('success')}}</strong>
+            </div>
+         @endif
+              
+         @if(session()->has('error'))
+            <div class="alert alert-danger alert-block">
+               <button type="button" class="close" data-dismiss="alert">×</button>	
+                  <strong>{{ session('error')}}</strong>
+            </div>
+         @endif
 
         <div class="card py-3 px-4 shadow-md">
          <form method="POST" action="{{ route('daftar.simpan') }}" enctype="multipart/form-data">
             @csrf
          
          <input type="hidden" class="form-control" id="id_kepengurusan" name="id_kepengurusan" value="{{ $kabinet->id_kepengurusan }}">
+         <input type="hidden" class="form-control" id="id_pendaftaran" name="id_pendaftaran" value="{{ $id_pendaftar }}">
 
          <div class="row g-3 card-body">
             <h5>Data Diri Anda</h5><hr style="margin-top:-8px">
@@ -237,11 +246,12 @@
                </div>
               @enderror
             </div>
-            <p><a href="https://docs.google.com/document/d/1GaYLbaWdTNxjytbFbrY0xyQ62vcspoCbV_M7T2w5AEU/edit?usp=sharing" download>*Download Template Surat Pernyataan</a></p>
+            <p><a href="https://docs.google.com/document/d/1nvdRgqiLHuAANrxixZgSJOdWmQ0Kvy2o/edit?usp=drivesdk&ouid=113787997607381864265&rtpof=true&sd=true" download>*Download Template Surat Pernyataan</a></p>
          </div>
 
             <div class="col-12">
               <button type="submit" class="btn btn-primary">Daftar</button>
+              <a href="/" class="btn btn-warning">Kembali</a>
             </div>
           </form>
          </div>

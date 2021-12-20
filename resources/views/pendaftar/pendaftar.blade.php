@@ -37,6 +37,21 @@
     <div class="content">
         <div class="card card-info card-outline">
             <div class="card-body">
+              @if(session()->has('success'))
+              <div class="alert alert-success alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>	
+                      <strong>{{ session('success')}}</strong>
+              </div>
+              @endif
+              
+              @if(session()->has('error'))
+              <div class="alert alert-danger alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>	
+                      <strong>{{ session('error')}}</strong>
+              </div>
+              @endif
+
+
                 <div class="card card-success">
                   <table class="table table-hover">
                     <thead>
@@ -44,21 +59,24 @@
                         <th scope="col">No.</th>
                         <th scope="col">Nama</th>
                         <th scope="col">NIM</th>
-                        <th scope="col">Pilihan 1</th>
-                        <th scope="col">Pilihan 2</th>
                         <th scope="col">Aksi</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {{-- @foreach ($data_pendaftar as $pendaftar) --}}
-                      <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                        <td><a href="#" class="btn btn-primary">Detail</a></td>
-                      </tr>
+                      @foreach ($pendaftar as $data)
+                        {{-- @if (empty($data))
+                        <tr>
+                          <td colspan="4">Data Kosong</td>
+                        </tr> 
+                        @else --}}
+                        <tr>
+                          <th scope="row">{{ $loop->iteration }}</th>
+                          <td>{{ $data->nama }}</td>
+                          <td>{{ $data->nim }}</td>
+                          <td><a href="/pendaftar/detail/{{ $data->id_pendaftaran}}" class="btn btn-primary">Detail</a></td>
+                        </tr> 
+                        {{-- @endif --}}
+                      @endforeach
                     </tbody>
                   </table>
                   </div>
