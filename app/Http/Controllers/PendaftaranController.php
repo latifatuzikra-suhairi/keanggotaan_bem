@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Dinas_biro;
 use App\Models\Kepengurusan;
 use App\Models\Pendaftaran;
+use App\Models\Pilihan_daftar;
 use Illuminate\Http\Request;
 
 class PendaftaranController extends Controller
@@ -16,6 +17,14 @@ class PendaftaranController extends Controller
      */
     public function index()
     {
+        $tahun_daftar = date('Y');
+        $kode_tahun = substr($tahun_daftar, 2);
+
+        $id_pendaftar = Pendaftaran::max('id_pendaftaran');
+        $urutan = (int) substr($id_pendaftar, 2, 5);
+        $urutan++;
+        $kodePendaftar = $kode_tahun . sprintf("%03s", $urutan);
+
         $kabinet = Kepengurusan::select('id_kepengurusan', 'nama_kabinet')
                     ->where('status_kepengurusan', 1)
                     ->first();
@@ -25,7 +34,8 @@ class PendaftaranController extends Controller
                     'dinas_biro.id_kepengurusan')
                     ->where('dinas_biro.id_kepengurusan', $kabinet->id_kepengurusan)
                     ->get();
-        return view('pendaftaran', ['dinas_biro' => $dinas_biro, 'kabinet' => $kabinet]);
+
+        return view('pendaftaran', ['dinas_biro' => $dinas_biro, 'kabinet' => $kabinet, 'id_pendaftar' => $kodePendaftar]);
     }
 
     /**
@@ -47,13 +57,14 @@ class PendaftaranController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'id_pendaftaran' => 'required',
             'id_kepengurusan' => 'required',
             'nama' => 'required|max:50',
             'nim' => 'required',
             'jurusan' => 'required',
             'email' => 'required|email',
             'no_hp' => 'required|max:13',
-            'tempat_lahir' => 'required|max:20',                
+            'tgl_lahir' => 'required|max:20',                
             'tgl_lahir' => 'required',
             'transkrip' => 'required|mimes:pdf',
             'krs' => 'required|mimes:pdf',
@@ -84,32 +95,46 @@ class PendaftaranController extends Controller
         $status_kelulusan = 0;
         $tahun_daftar = date('Y');
 
-        Pendaftaran::create([
-            'id_kepengurusan' => $request->id_kepengurusan,
-            'nama' => $request->nama,
-            'nim' => $request->nim,
-            'jurusan' => $request->jurusan,
-            'email' => $request->email,
-            'no_hp' => $request->no_hp,
-            'tempat_lahir' => $request->tempat_lahir,
-            'tgl_lahir' => $request->tgl_lahir,
-            'motto' => $request->motto,
-            'kelebihan' => $request->kelebihan,
-            'kekurangan' => $request->kekurangan,
-            'motivasi' => $request->motivasi,
-            'id_pilihan_1' => $request->id_pilihan_1,
-            'alasan_pil_1' => $request->alasan_pil_1,
-            'id_pilihan_2' => $request->id_pilihan_2,
-            'alasan_pil_2' => $request->alasan_pil_2,
-            'status_kelulusan' => $status_kelulusan,
-            'tahun_daftar' => $tahun_daftar,
-            'foto' => $foto_name,
-            'krs' => $krs_name,
-            'transkrip_nilai' => $transkrip_name,
-            'surat_pernyataan' => $surat_name
-        ]);
+        $pendaftaran = new Pendaftaran;
+        $pendaftaran->id_pendaftaran = $request->id_pendaftaran;
+        $pendaftaran->id_kepengurusan = $request->id_kepengurusan;
+        $pendaftaran->nama = $request->nama;
+        $pendaftaran->nim = $request->nim;
+        $pendaftaran->jurusan = $request->jurusan;
+        $pendaftaran->email = $request->email;
+        $pendaftaran->no_hp = $request->no_hp;
+        $pendaftaran->tempat_lahir = $request->tempat_lahir;
+        $pendaftaran->tgl_lahir = $request->tgl_lahir;
+        $pendaftaran->motto = $request->motto;
+        $pendaftaran->kelebihan = $request->kelebihan;
+        $pendaftaran->kekurangan = $request->kekurangan;
+        $pendaftaran->motivasi = $request->motivasi;
+        $pendaftaran->status_kelulusan = $status_kelulusan;
+        $pendaftaran->tahun_daftar = $tahun_daftar;
+        $pendaftaran->foto = $foto_name;
+        $pendaftaran->krs = $krs_name;
+        $pendaftaran->transkrip_nilai = $transkrip_name;
+        $pendaftaran->surat_pernyataan = $surat_name;
+        $pendaftaran->save();
 
-        return redirect('/daftar')->with('success', 'Pendaftaran Berhasil Dilakukan');
+        $pil1 = new Pilihan_daftar;
+        $pil1->id_pendaftaran = $request->id_pendaftaran;
+        $pil1->id_pilihan = $request->id_pilihan_1;
+        $pil1->alasan_pil = $request->alasan_pil_1;
+        $pil1->save();
+
+        $pil2 = new Pilihan_daftar;
+        $pil2->id_pendaftaran = $request->id_pendaftaran;
+        $pil2->id_pilihan = $request->id_pilihan_2;
+        $pil2->alasan_pil = $request->alasan_pil_2;
+        $pil2->save();
+
+        if($pendaftaran == true && $pil1 == true && $pil2 == true ){
+            return redirect('/daftar')->with('success', 'Pendaftaran Berhasil Dilakukan');
+        }
+        else{
+            return redirect('/daftar')->with('error', 'Pendaftaran Gagal Dilakukan!');
+        }
     }
 
     /**

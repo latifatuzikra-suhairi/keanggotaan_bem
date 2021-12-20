@@ -16,7 +16,16 @@ class Dinas_biro extends Model
 
     public function kepengurusan()
     {
-        return $this->belongsTo(Mahasiswa::class);
+        return $this->belongsTo(Kepengurusan::class);
+    }
+
+    public function pilihan_daftar()
+    {
+        return $this->hasMany(Pilihan_daftar::class);
     }
  
+    public function pengurus()
+    {
+        return $this->hasMany(Pengurus::class);
+    }
 }
