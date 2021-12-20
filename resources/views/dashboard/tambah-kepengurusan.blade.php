@@ -88,11 +88,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
     </div>
   </aside>
   <!-- /.control-sidebar -->
-
-  <!-- Main Footer -->
-  <footer class="main-footer">
-    @include('dashboard.footer')
-  </footer>
 </div>
 <!-- ./wrapper -->
 

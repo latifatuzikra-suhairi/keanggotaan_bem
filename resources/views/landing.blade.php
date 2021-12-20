@@ -39,24 +39,6 @@
                <span class="navbar-toggler-icon"></span>
            </button>
            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-               {{-- <ul class="nav nav-pills navbar-position">
-                   <li class="nav-item me-2">
-                       <a class="nav-link link-navbar" href="#">Home</a>
-                   </li>
-                   <li class="nav-item me-2">
-                       <a class="nav-link link-navbar" href="#">About</a>
-                   </li>
-                   <li class="nav-item me-2">
-                       <a class="nav-link link-navbar" href="#">How it work</a>
-                   </li>
-                   <li class="nav-item me-2">
-                       <a class="nav-link link-navbar" href="#">Clients</a>
-                   </li>
-                   <li class="nav-item me-2">
-                       <a class="nav-link link-navbar" href="#">Portfolio</a>
-                   </li>
-               </ul> --}}
-
                <ul class="nav nav-pills">
                    <li class="nav-item me-2">
                        <a href="{{ route('login') }}" class="nav-link btn-custom rounded shadow" id="btn-login">Sign In</a>
@@ -86,7 +68,7 @@
                 </p>
                 <p class="mt-2 text-muted">Jadilah bagian dari kami!</p>
                 <div class="d-flex"style="margin-top:-10px">
-                    <a href="{{ route('register') }}" class="btn btn-blue px-4 py-1 rounded shadow">Daftar</a>
+                    <a href="{{ route('daftar') }}" class="btn btn-blue px-4 py-1 rounded shadow">Daftar</a>
                 </div>
 
             </div>

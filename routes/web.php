@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\AutentikasiController;
 use App\Http\Controllers\PendaftaranController;
+use App\Http\Controllers\KepengurusanController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,14 +23,24 @@ Route::get('/', function () {
 
 Route::get('/daftar',[PendaftaranController::class, 'index'])->name('daftar'); //index laman pendaftaran
 Route::post('/daftar/store',[PendaftaranController::class, 'store'])->name('daftar.simpan'); //simpan data pendaftaran
+
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('/dashboard', function () {
     return view('dashboard.beranda');
 });
 
-Route::get('/kepengurusan',[App\Http\Controllers\KepengurusanController::class, 'index'])->name('kepengurusan');
-Route::get('/tambah-kepengurusan',[App\Http\Controllers\KepengurusanController::class, 'create'])->name('tambah-kepengurusan');
-Route::post('/simpan-kepengurusan',[App\Http\Controllers\KepengurusanController::class, 'store'])->name('simpan-kepengurusan');
+Route::get('/pendaftar', [AutentikasiController::class, 'pendaftarindex'])->name('pendaftar');
+Route::get('/pendaftar/detail', [AutentikasiController::class, 'detail'])->name('pendaftar.detail');
+
+// Harusnya tambahin id
+Route::get('/profil', [AutentikasiController::class, 'profilindex'])->name('profil');
+// Ganti password pake id
+Route::get('/gantipassword/', [AutentikasiController::class, 'gantipassword'])->name('ganti-password');
+Route::post('/gantipassword/store', [AutentikasiController::class, 'savegantipassword'])->name('save-ganti-password');
+
+Route::get('/kepengurusan',[KepengurusanController::class, 'index'])->name('kepengurusan');
+Route::get('/tambah-kepengurusan',[KepengurusanController::class, 'create'])->name('tambah-kepengurusan');
+Route::post('/simpan-kepengurusan',[KepengurusanController::class, 'store'])->name('simpan-kepengurusan');
