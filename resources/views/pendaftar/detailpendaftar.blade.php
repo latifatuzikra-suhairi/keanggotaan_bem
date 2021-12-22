@@ -39,6 +39,7 @@
         <div class="card card-info card-outline">
             <div class="card-body">
                <div class="row g-3 card-body">
+                  <img src="{{ asset('foto/' .$detail->foto) }}" style="width:195px;height:236px;">
                   <h5>Data Diri {{$detail->nama}}</h5><hr style="margin-top:-8px">
                   <div class="col-md-4">
                     <label for="nama" class="form-label">Nama</label>
@@ -90,13 +91,34 @@
                   </div>
                   <div class="col-md-6">
                      <label for="motto">Motto Hidup Anda</label>
-                     <textarea class="form-control @error('motto') is-invalid @enderror" placeholder="Sampaikan motto hidup Anda" id="motto" name="motto"readonly>{{$detail->motto}}</textarea>
+                     <textarea class="form-control" placeholder="Sampaikan motto hidup Anda" id="motto" name="motto"readonly>{{$detail->motto}}</textarea>
+                  </div>
+
+                  <?php
+                     $pilihan = explode(",", $detail->nama_dinas);
+                     $alasan = explode(",", $detail->alasan_pilihan);
+                  ?>
+                  <div class="col-md-6">
+                     <label for="motto">Pilihan 1 Dinas/Biro</label>
+                     <input type="text" class="form-control" id="pilihan_1" name="pilihan_1" value="{{$pilihan[0]}}" readonly>
+                  </div>
+                  <div class="col-md-6">
+                     <label for="motto">Pilihan 2 Dinas/Biro</label>
+                     <input type="text" class="form-control" id="pilihan_2" name="pilihan_2" value="{{$pilihan[1]}}" readonly>
+                  </div>
+                  <div class="col-md-6">
+                     <label for="alasan_pil_1">Alasan Pilihan 1 Dinas/Biro</label>
+                     <textarea class="form-control" placeholder="Alasan Pilihan 1 Dinas/Biro yang Anda Pilih" id="alasan_pil_1" name="alasan_pil_1" readonly>{{$alasan[0]}}</textarea>    
+                  </div>
+                  <div class="col-md-6">
+                     <label for="alasan_pil_2">Alasan Pilihan 2 Dinas/Biro</label>
+                     <textarea class="form-control" placeholder="Alasan Pilihan 2 Dinas/Biro yang Anda Pilih" id="alasan_pil_2" name="alasan_pil_2" readonly>{{$alasan[1]}}</textarea>
                   </div>
                </div>
 
             <hr style="margin-top:-8px" >     
             <h5>Luluskan {{$detail->nama}}?</h5>
-            <form method="POST" action="/pendaftar/detail/{$detail->id_pendaftaran}/assign">
+            <form method="POST" action="/pendaftar/detail/{{$detail->id_pendaftaran}}/assign" onsubmit="return confirm('Yakin akan assign akun?')">
             @csrf
                <input type="hidden" class="form-control" id="id_pendaftaran" name="id_pendaftaran" value="{{ $detail->id_pendaftaran }}">
                <div class="row g-3 card-body">
@@ -109,6 +131,18 @@
                      @endforeach
                    </select>
                    @error('id_dinasbiro')
+                  <div class="invalid-feedback">
+                     {{ $message }}
+                  </div>
+                 @enderror
+               </div>
+               <div class="col-md-6">
+                  <label for="role" class="form-label">Role</label>
+                  <select class="form-select @error('role') is-invalid @enderror" aria-label="Default select example" name="role" required>
+                     <option value="pengurus" selected>Pengurus</option>
+                     <option value="admin">Admin</option>
+                   </select>
+                   @error('role')
                   <div class="invalid-feedback">
                      {{ $message }}
                   </div>

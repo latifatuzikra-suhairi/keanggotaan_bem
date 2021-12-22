@@ -11,7 +11,7 @@ class Pengurus extends Model
     public $timestamps = false;
     protected $table = 'pengurus';
     protected $primaryKey = 'id_pengurus';
-    protected $fillable=['id_pendaftaran', 'id_dinasbiro', 'password'];
+    protected $fillable=['id_pendaftaran', 'id_dinasbiro', 'password', 'role'];
 
     public function pendaftaran(){
         return $this->belongsTo(Pendaftaran::class);

@@ -51,39 +51,55 @@
               </div>
               @endif
 
+                  <div class="table-responsive p-2">
+                    <table class="table table-hover table-bordered">
+                      <thead>
+                        <tr>
+                          <th scope="col">No.</th>
+                          <th scope="col">Nama</th>
+                          <th scope="col">NIM</th>
+                          <th scope="col">Pilihan 1 Dinas/Biro</th>
+                          <th scope="col">Pilihan 2 Dinas/Biro</th>
+                          <th scope="col"></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        @forelse ($pendaftar as $key => $data)
+                        <?php
+                          $pilihan = explode(",", $data->nama_dinas)
+                        ?>
+                          <tr>
+                            <th scope="row">{{ $pendaftar->firstItem() + $key }}</th>
+                            <td>{{ $data->nama }}</td>
+                            <td>{{ $data->nim }}</td>
+                            <td>{{ $pilihan[0] }}</td>
+                            <td>{{ $pilihan[1] }}</td>
+                            <td><a href="/pendaftar/detail/{{ $data->id_pendaftaran}}"><i class="fas fa-eye"></i></a></td>
+                          </tr> 
+                        @empty
+                          <tr>
+                            <td colspan="6" style="text-align: center">Data tidak ditemukan</td>
+                          </tr>  
+                        @endforelse
+                      </tbody>
+                    </table>
 
-                <div class="card card-success">
-                  <table class="table table-hover">
-                    <thead>
-                      <tr>
-                        <th scope="col">No.</th>
-                        <th scope="col">Nama</th>
-                        <th scope="col">NIM</th>
-                        <th scope="col">Aksi</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      @foreach ($pendaftar as $data)
-                        {{-- @if (empty($data))
-                        <tr>
-                          <td colspan="4">Data Kosong</td>
-                        </tr> 
-                        @else --}}
-                        <tr>
-                          <th scope="row">{{ $loop->iteration }}</th>
-                          <td>{{ $data->nama }}</td>
-                          <td>{{ $data->nim }}</td>
-                          <td><a href="/pendaftar/detail/{{ $data->id_pendaftaran}}" class="btn btn-primary">Detail</a></td>
-                        </tr> 
-                        {{-- @endif --}}
-                      @endforeach
-                    </tbody>
-                  </table>
+                    <div class="mr-2 text-muted" style="font-size: 15px; float:right;">
+                      Showing
+                      {{$pendaftar->firstItem()}}
+                      to
+                      {{$pendaftar->lastItem()}}
+                      of
+                      {{$pendaftar->total()}}
+                      entries
+                   </div><br>
+                  <div class="mr-2 pagination pagination-md" style="float:right;">
+                      {{ $pendaftar->links('pagination::bootstrap-4') }}
+                  </div>
+
                   </div>
                 </div>
             </div>
-            
-
       </div>
     </div>
     <!-- /.content -->

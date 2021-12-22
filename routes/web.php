@@ -35,9 +35,10 @@ Route::get('/dashboard', function () {
     return view('dashboard.beranda');
 });
 
-Route::get('/pendaftar', [AutentikasiController::class, 'pendaftarindex'])->name('pendaftar');
-Route::get('/pendaftar/detail/{id_pendaftaran}', [AutentikasiController::class, 'detailpendaftaran'])->name('pendaftar.detail');
-Route::post('/pendaftar/detail/{id_pendaftaran}/assign', [AutentikasiController::class, 'assignakun'])->name('pendaftar.assign');
+//Data Pendaftar dan Assign Akun
+Route::get('/pendaftar', [AutentikasiController::class, 'getPendaftaran'])->name('pendaftar');
+Route::get('/pendaftar/detail/{id_pendaftaran}', [AutentikasiController::class, 'getDetailPendaftaran'])->name('pendaftar.detail');
+Route::post('/pendaftar/detail/{id_pendaftaran}/assign', [AutentikasiController::class, 'setAssignAkun'])->name('pendaftar.assign');
 
 // Harusnya tambahin id
 Route::get('/profil', [AutentikasiController::class, 'profilindex'])->name('profil');

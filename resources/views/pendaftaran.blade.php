@@ -45,9 +45,8 @@
          @endif
 
         <div class="card py-3 px-4 shadow-md">
-         <form method="POST" action="{{ route('daftar.simpan') }}" enctype="multipart/form-data">
-            @csrf
-         
+         <form method="POST" action="{{ route('daftar.simpan') }}" enctype="multipart/form-data" onsubmit="return confirm('Yakin akan mendaftar?')">
+         @csrf
          <input type="hidden" class="form-control" id="id_kepengurusan" name="id_kepengurusan" value="{{ $kabinet->id_kepengurusan }}">
          <input type="hidden" class="form-control" id="id_pendaftaran" name="id_pendaftaran" value="{{ $id_pendaftar }}">
 
@@ -162,7 +161,7 @@
             </div>
             <div class="col-md-6">
                <label for="pilihan_1" class="form-label">Pilihan 1 Dinas/Biro</label>
-               <select class="form-select @error('pilihan_1') is-invalid @enderror" aria-label="Default select example" name="id_pilihan_1">
+               <select class="form-select @error('pilihan_1') is-invalid @enderror" aria-label="Default select example" name="id_pilihan_1" required>
                   <option value="" selected disabled>Pilih Dinas/Biro</option>
                   @foreach ($dinas_biro as $data)
                   <option value="{{ $data->id_dinasbiro }}">{{ $data->nama_dinasbiro }}</option>
@@ -176,7 +175,7 @@
             </div>
             <div class="col-md-6">
                <label for="pilihan_2" class="form-label">Pilihan 2 Dinas/Biro</label>
-               <select class="form-select @error('pilihan_2') is-invalid @enderror" aria-label="Default select example" name="id_pilihan_2"> 
+               <select class="form-select @error('pilihan_2') is-invalid @enderror" aria-label="Default select example" name="id_pilihan_2" required> 
                   <option value="" selected disabled>Pilih Dinas/Biro</option>
                   @foreach ($dinas_biro as $data)
                   <option value="{{ $data->id_dinasbiro }}">{{ $data->nama_dinasbiro }}</option>
@@ -246,7 +245,7 @@
                </div>
               @enderror
             </div>
-            <p><a href="https://docs.google.com/document/d/1nvdRgqiLHuAANrxixZgSJOdWmQ0Kvy2o/edit?usp=drivesdk&ouid=113787997607381864265&rtpof=true&sd=true" download>*Download Template Surat Pernyataan</a></p>
+            <p><a href="https://docs.google.com/document/d/1nvdRgqiLHuAANrxixZgSJOdWmQ0Kvy2o/edit?usp=drivesdk&ouid=113787997607381864265&rtpof=true&sd=true" target="_blank" download>*Download Template Surat Pernyataan</a></p>
          </div>
 
             <div class="col-12">
