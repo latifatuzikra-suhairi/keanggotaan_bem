@@ -20,8 +20,8 @@ Route::get('/', function () {
     return view('landing');
 });
 
-Route::get('/daftar',[PendaftaranController::class, 'index'])->name('daftar'); //index laman pendaftaran
-Route::post('/daftar/store',[PendaftaranController::class, 'store'])->name('daftar.simpan'); //simpan data pendaftaran
+Route::get('/daftar',[PendaftaranController::class, 'requestHalamanPendaftaran'])->name('daftar'); //index laman pendaftaran
+Route::post('/daftar/store',[PendaftaranController::class, 'setDataPendaftaran'])->name('daftar.simpan'); //simpan data pendaftaran
 
 Auth::routes();
 Auth::routes(['register'=> false, 'reset'=>false]);
@@ -41,10 +41,10 @@ Route::get('/pendaftar/detail/{id_pendaftaran}', [AutentikasiController::class, 
 Route::post('/pendaftar/detail/{id_pendaftaran}/assign', [AutentikasiController::class, 'setAssignAkun'])->name('pendaftar.assign');
 
 // Harusnya tambahin id
-Route::get('/profil', [AutentikasiController::class, 'profilindex'])->name('profil');
+Route::get('/profil', [AutentikasiController::class, 'requestHalamanProfil'])->name('profil');
 // Ganti password pake id
-Route::get('/gantipassword/', [AutentikasiController::class, 'gantipassword'])->name('ganti-password');
-Route::post('/gantipassword/store', [AutentikasiController::class, 'savegantipassword'])->name('save-ganti-password');
+Route::get('/gantipassword/', [AutentikasiController::class, 'requestHalamanGantiPassword'])->name('ganti-password');
+Route::post('/gantipassword/store', [AutentikasiController::class, 'setPassword'])->name('set-password');
 
 Route::get('/kepengurusan',[KepengurusanController::class, 'index'])->name('kepengurusan');
 Route::get('/tambah-kepengurusan',[KepengurusanController::class, 'create'])->name('tambah-kepengurusan');

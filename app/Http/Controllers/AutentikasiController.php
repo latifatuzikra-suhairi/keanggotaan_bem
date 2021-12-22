@@ -78,17 +78,17 @@ class AutentikasiController extends Controller
     }
 
 
-    public function profilindex(){
+    public function requestHalamanProfil(){
         //meminta id
         return view('profil.profil');
     }
 
-    public function gantipassword(){
+    public function requestHalamanGantiPassword(){
         //meminta dan mereturn id
         return view('profil.gantipassword');
     }
 
-    public function storegantipassword(){
+    public function setPassword(){
         
     }
 }

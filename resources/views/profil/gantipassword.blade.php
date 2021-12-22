@@ -39,11 +39,11 @@
         <div class="card card-info card-outline">
          <div class="card-header">
             <div class="card-tools">
-                <a href="#" class="btn btn-primary">Kembali</i></a>
+                <a href="{{ route('profil')}}" class="btn btn-warning">Kembali</i></a>
             </div>
         </div>
         <div class="card-body">
-            <form action="{{ route('save-ganti-password')}}" method="post">
+            <form action="{{ route('set-password')}}" method="post">
                 {{ csrf_field()}}
                <input type="hidden" name="id_pengurus" value=""></input>
                <div class="form-group">
@@ -55,7 +55,7 @@
                      <input type="text" id="password_baru" name="password_baru" class="form-control" placeholder="Masukkan password baru">
                </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-success">Simpan Data</button>
+                    <button type="submit" class="btn btn-primary">Simpan Data</button>
                 </div>
             </form>
         </div>

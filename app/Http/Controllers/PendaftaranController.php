@@ -15,7 +15,7 @@ class PendaftaranController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function requestHalamanPendaftaran()
     {
         $tahun_daftar = date('Y');
         $kode_tahun = substr($tahun_daftar, 2);
@@ -39,22 +39,12 @@ class PendaftaranController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function setDataPendaftaran(Request $request)
     {
         $request->validate([
             'id_pendaftaran' => 'required',
