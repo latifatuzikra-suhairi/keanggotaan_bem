@@ -80,7 +80,12 @@ class AutentikasiController extends Controller
 
     public function requestHalamanProfil(){
         //meminta id
-        return view('profil.profil');
+        $profil = Pendaftaran::select('pendaftaran.nama', 'dinas_biro.nama_dinasbiro', 'pendaftaran.tempat_lahir', 'pendaftaran.tgl_lahir')
+                    ->join('pengurus', 'pendaftaran.id_pendaftaran', '=', 'pengurus.id_pendaftaran')
+                    ->join('dinas_biro', 'dinas_biro.id_dinasbiro', '=', 'pengurus.id_dinasbiro')
+                    ->first();
+                    
+        return view('profil.profil', ['profil' => $profil]);
     }
 
     public function requestHalamanGantiPassword(){

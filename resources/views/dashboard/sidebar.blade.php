@@ -1,5 +1,5 @@
 <aside class="main-sidebar elevation-4" style="background: #9397A7;">
-
+<?php session_start() ?>
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
@@ -8,7 +8,7 @@
           <img src="{{ asset('dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a class="d-block link-tidak-aktif">Laila Rahmatul Aufa</a>
+          <a class="d-block link-tidak-aktif"><?= $_SESSION['user']['nama'] ?></a>
         </div>
       </div>
 
@@ -34,10 +34,11 @@
                 </a>
               </li>
               <li class="nav-item mt-3 mb-3">
-                <a href="#" class="nav-link">
+                <form action="{{ route('logout') }}" class="nav-link" method="post">
+                  @csrf
                   <img class="w-5 h-5" width="24px" src="{{ asset('img/logout.png') }}">
-                  <p class="ml-2">Logout</p>
-                </a>
+                  <button type="submit" class="ml-2 btn">Logout</button>
+                </form>
               </li>
         </ul> 
       </nav>

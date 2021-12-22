@@ -5,6 +5,7 @@ use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\KepengurusanController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,18 +24,10 @@ Route::get('/', function () {
 Route::get('/daftar',[PendaftaranController::class, 'requestHalamanPendaftaran'])->name('daftar'); //index laman pendaftaran
 Route::post('/daftar/store',[PendaftaranController::class, 'setDataPendaftaran'])->name('daftar.simpan'); //simpan data pendaftaran
 
-Auth::routes();
 Auth::routes(['register'=> false, 'reset'=>false]);
-Route::get('/register', function () {
-    abort(404);
-});
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-Route::get('/dashboard', function () {
-    return view('dashboard.beranda');
-});
-
+Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
 //Data Pendaftar dan Assign Akun
 Route::get('/pendaftar', [AutentikasiController::class, 'getPendaftaran'])->name('pendaftar');
 Route::get('/pendaftar/detail/{id_pendaftaran}', [AutentikasiController::class, 'getDetailPendaftaran'])->name('pendaftar.detail');
@@ -48,4 +41,3 @@ Route::post('/gantipassword/store', [AutentikasiController::class, 'setPassword'
 
 Route::get('/kepengurusan',[KepengurusanController::class, 'index'])->name('kepengurusan');
 Route::get('/tambah-kepengurusan',[KepengurusanController::class, 'create'])->name('tambah-kepengurusan');
-Route::post('/simpan-kepengurusan',[KepengurusanController::class, 'store'])->name('simpan-kepengurusan');

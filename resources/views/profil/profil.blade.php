@@ -42,11 +42,11 @@
                </div>
             </div>
             <div class="card-body">
-                <div class="card card-success">
-                  
-                  </div>
-                </div>
+                 <p>Nama : {{$profil->nama}}</p>
+                 <p>Nama Jabatan : {{$profil->nama_dinasbiro}}</p>
+                 <p>Tempat/Tanggal Lahir : {{$profil->tempat_lahir}}/{{date('d-m-Y', strtotime($profil->tgl_lahir))}}</p>
             </div>
+        </div>
             
 
       </div>
