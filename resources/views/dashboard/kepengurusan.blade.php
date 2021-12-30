@@ -46,24 +46,40 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <a href="{{ route('tambah-kepengurusan')}}" class="btn btn-success">Tambah Data <i class="fas fa-plus-square"></i></a>
                 </div>
             </div>
+            @if(session()->has('success'))
+            <div class="alert alert-success alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>	
+                     <strong>{{ session('success')}}</strong>
+            </div>
+         @endif
+              
+         @if(session()->has('error'))
+            <div class="alert alert-danger alert-block">
+               <button type="button" class="close" data-dismiss="alert">×</button>	
+                  <strong>{{ session('error')}}</strong>
+            </div>
+         @endif
             <div class="card-body">
                 <div class="card card-success">
                     <div class="card-body">
                       <div class="row">
+
+                        @foreach ($dtKepengurusan as $item)
+                            
+                        
                         <div class="col-md-12 col-lg-6 col-xl-4">
                           <div class="card mb-2">
-                            <img class="card-img-top" src="../dist/img/photo3.jpg" alt="Dist Photo 3">
-                            <div class="card-img-overlay">
-                              <h5 class="card-title text-primary">Card Title</h5>
-                              <p class="card-text pb-1 pt-1 text-white">
-                                Lorem ipsum dolor <br>
-                                sit amet, consectetur <br>
-                                adipisicing elit sed <br>
-                                do eiusmod tempor. </p>
-                              <a href="#" class="text-primary">Last update 3 days ago</a>
+                            <img class="card-img-top" src="../img/logoBEM.png" alt="">
+                            <div class="card-img-overlay"><br><br><br><br>
+                              <br><br><br><br><br><br><br>
+                              
+                              <a href="/pengurus/{{ $item->id_pengurus}}" class="text-primary"><h3 class="card-title text-primary">{{$item->nama_kabinet}} {{$item->periode}} More...</h3><br></a>
+                             
                             </div>
                           </div>
                         </div>
+                        @endforeach 
+
                       </div>
                     </div>
                   </div>
@@ -91,5 +107,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 <!-- REQUIRED SCRIPTS -->
 @include('dashboard.script')
+@include('sweetalert::alert')
 </body>
 </html>

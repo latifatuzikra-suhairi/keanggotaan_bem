@@ -3,6 +3,7 @@
 use App\Http\Controllers\AutentikasiController;
 use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\KepengurusanController;
+use App\Http\Controllers\PengurusController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -39,5 +40,17 @@ Route::get('/profil', [AutentikasiController::class, 'requestHalamanProfil'])->n
 Route::get('/gantipassword/', [AutentikasiController::class, 'requestHalamanGantiPassword'])->name('ganti-password');
 Route::post('/gantipassword/store', [AutentikasiController::class, 'setPassword'])->name('set-password');
 
+//tampil kepengurusan
 Route::get('/kepengurusan',[KepengurusanController::class, 'index'])->name('kepengurusan');
+//tampil tambah-kepengurusan
 Route::get('/tambah-kepengurusan',[KepengurusanController::class, 'create'])->name('tambah-kepengurusan');
+//simpan tambah-kepengurusan
+Route::post('/simpan-kepengurusan',[KepengurusanController::class, 'store'])->name('simpan-kepengurusan');
+//tampil pengurus
+Route::get('/pengurus/{id_kepengurusan}',[PengurusController::class, 'index'])->name('pengurus');
+//tampil detail pengurus
+Route::get('/pengurus/detail/{id_pengurus}',[PengurusController::class, 'getdetail'])->name('detailPengurus');
+//tampil update detail pengurus
+Route::get('/pengurus/detail/updatepengurus/{id_pengurus}',[PengurusController::class, 'getdata'])->name('tampil_updatedetailPengurus');
+//update detail pengurus
+Route::post('/pengurus/detail/updatepengurus/{id_pengurus}',[PengurusController::class, 'setData'])->name('updatedetailPengurus');

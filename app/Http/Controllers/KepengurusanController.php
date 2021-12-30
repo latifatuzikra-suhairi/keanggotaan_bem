@@ -14,7 +14,8 @@ class KepengurusanController extends Controller
      */
     public function index()
     {
-        return view('dashboard.kepengurusan');
+        $dtKepengurusan = Kepengurusan::all();
+        return view('dashboard.kepengurusan', compact('dtKepengurusan'));
     }
 
     /**
@@ -35,15 +36,17 @@ class KepengurusanController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->all());
+        $file_name = $request->logo->getClientOriginalName();
+        $logo = $request->logo->move(public_path('logo'), $file_name);
+        
         Kepengurusan::create([
             'nama_kabinet' => $request->nama_kabinet,
             'periode' =>$request->periode,
             'status_kepengurusan' =>$request->status,
-            'logo_kabinet' =>$request->logo,
+            'logo_kabinet' =>$file_name,
         ]);
 
-        return redirect('kepengurusan');
+        return redirect('kepengurusan')->with('toast_success', 'Data Berhasil Tersimpan');
     }
 
     /**

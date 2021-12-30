@@ -43,24 +43,25 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <div class="card card-info card-outline">
             <div class="card-header">
                 <div class="card-tools">
-                    <a href="#" class="btn btn-success">Kembali <i class="fas fa-plus-square"></i></a>
+                    <a href="{{ route('kepengurusan')}}" class="btn btn-success">Kembali <i class="fas fa-plus-square"></i></a>
                 </div>
             </div>
+            
             <div class="card-body">
-                <form action="{{route('simpan-kepengurusan')}}" method="post">
+                <form action="{{route('simpan-kepengurusan')}}" method="post" enctype="multipart/form-data">
                     {{ csrf_field()}}
                     <div class="form-group">
                         <label for="nama_kabinet" class="form-label">Nama Kabinet</label><br>
-                        <input type="text" id="nama_kabinet" name="nama_kabinet" class="form-control" placeholder="Nama Kabinet">
+                        <input type="text" id="nama_kabinet" name="nama_kabinet" class="form-control" placeholder="Nama Kabinet" required>
                     </div>
                     <div class="form-group">
                         <label for="periode" class="form-label">Periode Kepengurusan</label><br>
-                        <input type="text" id="periode" name="periode" class="form-control" placeholder="Periode Kepengurusan">
+                        <input type="text" id="periode" name="periode" class="form-control" placeholder="Periode Kepengurusan" required>
                     </div>
                     <div class="form-group">
                         <label for="status" class="form-label">Status Kepengurusan</label><br>
-                        <input type="radio" name="status" value="1"> Aktif  
-                        <input type="radio" name="status" value="0"> Tidak Aktif 
+                        <input type="radio" name="status" value="1" > Aktif  
+                        <input type="radio" name="status" value="0" > Tidak Aktif 
                       </div>
                     <div class="form-group">
                         <label for="logo" class="form-label">Logo Kabinet</label><br>
