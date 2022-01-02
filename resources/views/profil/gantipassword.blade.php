@@ -41,21 +41,44 @@
             <div class="card-tools">
                 <a href="{{ route('profil')}}" class="btn btn-warning">Kembali</i></a>
             </div>
+            @if(session()->has('success'))
+            <div class="alert alert-success alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>	
+                     <strong>{{ session('success')}}</strong>
+            </div>
+            @endif
+              
+            @if(session()->has('error'))
+                <div class="alert alert-danger alert-block">
+                  <button type="button" class="close" data-dismiss="alert">×</button>	
+                      <strong>{{ session('error')}}</strong>
+                </div>
+            @endif
         </div>
+        
         <div class="card-body">
             <form action="{{ route('set-password')}}" method="post">
-                {{ csrf_field()}}
-               <input type="hidden" name="id_pengurus" value=""></input>
+               @csrf
                <div class="form-group">
                      <label for="password_lama" class="form-label">Password Lama</label><br>
-                     <input type="text" id="password_lama" name="password_lama" class="form-control" placeholder="Masukkan password lama">
-               </div>
+                     <input type="password" id="password_lama" name="password_lama" class="form-control @error('password_lama') is-invalid @enderror" placeholder="Masukkan password lama">
+                    @error('password_lama')
+                     <div class="invalid-feedback">
+                        {{ $message }}
+                     </div>
+                    @enderror
+              </div>
                <div class="form-group">
                      <label for="password_baru" class="form-label">Password Baru</label><br>
-                     <input type="text" id="password_baru" name="password_baru" class="form-control" placeholder="Masukkan password baru">
-               </div>
+                     <input type="password" id="password_baru" name="password_baru" class="form-control @error('password_baru') is-invalid @enderror" placeholder="Masukkan password baru">
+                     @error('password_baru')
+                     <div class="invalid-feedback">
+                        {{ $message }}
+                     </div>
+                    @enderror
+                </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Simpan Data</button>
+                    <button type="submit" class="btn btn-primary">Update Password</button>
                 </div>
             </form>
         </div>

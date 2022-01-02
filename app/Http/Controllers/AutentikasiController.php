@@ -35,7 +35,6 @@ class AutentikasiController extends Controller
         ->where('pendaftaran.id_pendaftaran', $id_pendaftaran)
         ->groupBy('pendaftaran.id_pendaftaran')
         ->first();
-        //dd($data);
 
         //mengambil nama dinas biro pada kepengurusan pendaftaran
         $id_kepengurusan = Pendaftaran::select('id_kepengurusan')
@@ -79,12 +78,6 @@ class AutentikasiController extends Controller
 
 
     public function requestHalamanProfil(){
-        //meminta id
-        // $profil = Pendaftaran::select('pendaftaran.nama', 'dinas_biro.nama_dinasbiro', 'pendaftaran.tempat_lahir', 'pendaftaran.tgl_lahir')
-        //             ->join('pengurus', 'pendaftaran.id_pendaftaran', '=', 'pengurus.id_pendaftaran')
-        //             ->join('dinas_biro', 'dinas_biro.id_dinasbiro', '=', 'pengurus.id_dinasbiro')
-        //             ->first();
-
         $id_pengurus = 17;
         $detail = Pengurus:: join('pendaftaran', 'pengurus.id_pendaftaran', '=', 'pendaftaran.id_pendaftaran')
         ->join('dinas_biro', 'dinas_biro.id_dinasbiro', '=', 'pengurus.id_dinasbiro')
@@ -153,7 +146,29 @@ class AutentikasiController extends Controller
         return view('profil.gantipassword');
     }
 
-    public function setPassword(){
+    public function setPassword(Request $request){
+        $id_pengurus = 17;
+
+        $userPassword = Pengurus::select('password')->where('id_pengurus', $id_pengurus)->first();
         
+        $request->validate([
+            'password_lama' => 'required',
+            'password_baru' => 'required|min:6|max:8'
+        ]);
+
+        if (!Hash::check($request->password_lama, $userPassword->password)) {
+            return back()->withErrors(['password_lama'=>'password not match']);
+        }
+        
+        $updatepassword = Pengurus::where('id_pengurus', $id_pengurus)->update([
+            'password' => Hash::make($request->password_baru)
+        ]);
+
+        if($updatepassword = 1){
+            return redirect('/gantipassword')->with('success', 'Ubah Password Berhasil Dilakukan');
+        }
+        else{
+            return redirect('/gantipassword')->with('error', 'Ubah Password Gagal Dilakukan');
+        }
     }
 }
