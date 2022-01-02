@@ -80,12 +80,72 @@ class AutentikasiController extends Controller
 
     public function requestHalamanProfil(){
         //meminta id
-        $profil = Pendaftaran::select('pendaftaran.nama', 'dinas_biro.nama_dinasbiro', 'pendaftaran.tempat_lahir', 'pendaftaran.tgl_lahir')
-                    ->join('pengurus', 'pendaftaran.id_pendaftaran', '=', 'pengurus.id_pendaftaran')
-                    ->join('dinas_biro', 'dinas_biro.id_dinasbiro', '=', 'pengurus.id_dinasbiro')
-                    ->first();
+        // $profil = Pendaftaran::select('pendaftaran.nama', 'dinas_biro.nama_dinasbiro', 'pendaftaran.tempat_lahir', 'pendaftaran.tgl_lahir')
+        //             ->join('pengurus', 'pendaftaran.id_pendaftaran', '=', 'pengurus.id_pendaftaran')
+        //             ->join('dinas_biro', 'dinas_biro.id_dinasbiro', '=', 'pengurus.id_dinasbiro')
+        //             ->first();
+
+        $id_pengurus = 17;
+        $detail = Pengurus:: join('pendaftaran', 'pengurus.id_pendaftaran', '=', 'pendaftaran.id_pendaftaran')
+        ->join('dinas_biro', 'dinas_biro.id_dinasbiro', '=', 'pengurus.id_dinasbiro')
+        ->join('kepengurusan', 'kepengurusan.id_kepengurusan', '=', 'pendaftaran.id_kepengurusan')
+        ->select('pendaftaran.nama', 'pendaftaran.nim', 'pendaftaran.jurusan', 'pendaftaran.email', 'pendaftaran.no_hp',
+         'pendaftaran.tempat_lahir', 'pendaftaran.tgl_lahir', 'pendaftaran.foto', 'dinas_biro.nama_dinasbiro', 'pengurus.*',
+         'kepengurusan.id_kepengurusan')
+        ->where('pendaftaran.status_kelulusan', '=', '1')
+        ->where('pengurus.id_pengurus', '=', $id_pengurus)
+        //->where('kepengurusan.id_kepengurusan', '=', $id_kepengurusan)
+        ->first();
+        //dd($detailPengurus);
+        return view('profil.profil', compact('detail'));
                     
-        return view('profil.profil', ['profil' => $profil]);
+        //return view('profil.profil', ['profil' => $profil]);
+    }
+
+    public function getdata()
+    {
+        $id_pengurus = 17;
+        $detail = Pengurus:: join('pendaftaran', 'pengurus.id_pendaftaran', '=', 'pendaftaran.id_pendaftaran')
+        ->join('dinas_biro', 'dinas_biro.id_dinasbiro', '=', 'pengurus.id_dinasbiro')
+        ->join('kepengurusan', 'kepengurusan.id_kepengurusan', '=', 'pendaftaran.id_kepengurusan')
+        ->select('pendaftaran.nama', 'pendaftaran.nim', 'pendaftaran.jurusan', 'pendaftaran.email', 'pendaftaran.no_hp',
+         'pendaftaran.tempat_lahir', 'pendaftaran.tgl_lahir', 'pendaftaran.foto', 'dinas_biro.nama_dinasbiro', 'pengurus.*',
+         'kepengurusan.id_kepengurusan')
+        ->where('pendaftaran.status_kelulusan', '=', '1')
+        ->where('pengurus.id_pengurus', '=', $id_pengurus)
+        //->where('kepengurusan.id_kepengurusan', '=', $id_kepengurusan)
+        ->first();
+        //dd($detailPengurus);
+        return view('profil.updatepengurus', compact('detail'));
+       
+    }
+
+    public function setData(Request $request)
+    {
+        $id_pengurus = 17;
+        $updatepengurus = Pengurus::where('id_pengurus', $id_pengurus)->update([
+            'alamat_skrng' => $request->alamat_skrng,
+            'alamat_asal' =>$request->alamat_asal,
+            'goldar' =>$request->goldar,
+            'riwayat_penyakit' =>$request->riwayat_penyakit,
+            'suku' => $request->suku,
+            'anak_ke' =>$request->anak_ke,
+            'jumlah_saudara' =>$request->jumlah_saudara,
+            'sosmed' =>$request->sosmed,
+            'orang_tua' => $request->orang_tua,
+            'level_ukt' =>$request->level_ukt,
+            'cita_cita' =>$request->cita_cita,
+            'hobi' =>$request->hobi,
+            'prestasi' =>$request->prestasi,
+            'organisasi' =>$request->organisasi,
+            'beasiswa' => $request->beasiswa,
+            'bisnis' =>$request->bisnis,
+            'status_mentoring' =>$request->status_mentoring,
+            'jabatan' =>$request->jabatan,
+        ]);
+        
+        return redirect('/profil')->with('toast_success', 'Data Berhasil Diupdate');
+        
     }
 
     public function requestHalamanGantiPassword(){

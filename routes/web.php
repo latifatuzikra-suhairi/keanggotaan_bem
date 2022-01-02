@@ -36,6 +36,9 @@ Route::post('/pendaftar/detail/{id_pendaftaran}/assign', [AutentikasiController:
 
 // Harusnya tambahin id
 Route::get('/profil', [AutentikasiController::class, 'requestHalamanProfil'])->name('profil');
+//update profil
+Route::get('/profil/update',[AutentikasiController::class, 'getdata'])->name('profil-update');
+Route::post('/profil/update/set',[AutentikasiController::class, 'setData'])->name('profil-setupdate');
 // Ganti password pake id
 Route::get('/gantipassword/', [AutentikasiController::class, 'requestHalamanGantiPassword'])->name('ganti-password');
 Route::post('/gantipassword/store', [AutentikasiController::class, 'setPassword'])->name('set-password');

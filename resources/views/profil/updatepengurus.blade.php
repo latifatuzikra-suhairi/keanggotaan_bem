@@ -20,12 +20,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Detail Data Pengurus</h1>
+            <h1 class="m-0"> Update Detail Data Pengurus</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a>Data Pengurus</a></li>
-              <li class="breadcrumb-item active">Detail</li>
+              <li class="breadcrumb-item active">Update Detail</li>
             </ol>
           </div>
         </div>
@@ -38,9 +38,15 @@
     <div class="content">
         <div class="card card-info card-outline">
             <div class="card-body">
-               <div class="row g-3 card-body"> 
+               <form method="POST" action="/profil/update/set" onsubmit="return confirm('Yakin update data?')">
+                  @csrf
+               <div class="row g-3 card-body">
                   <img src="{{ asset('foto/' .$detail->foto) }}" style="width:195px;height:236px;">
                   <h5>Data Diri {{$detail->nama}}</h5><hr style="margin-top:-8px">
+                  
+                     <label for="nama" class="form-label">ID Pendaftaran</label>
+                     <input type="text" class="form-control" id="nama" name="nama" value="{{$detail->id_pendaftaran}}" readonly>
+                  
                   <div class="col-md-4">
                     <label for="nama" class="form-label">Nama</label>
                     <input type="text" class="form-control" id="nama" name="nama" value="{{$detail->nama}}" readonly>
@@ -79,23 +85,23 @@
                <h5>Detail Data Diri {{$detail->nama}}</h5><hr style="margin-top:-8px" >
                   <div class="col-md-6">
                      <label for="alamat_skrng">Alamat Sekarang</label>
-                     <textarea class="form-control"  id="alamat_skrng" name="alamat_skrng" placeholder="Alamat Anda saat ini" readonly>{{$detail->alamat_skrng}}</textarea>
+                     <textarea class="form-control"  id="alamat_skrng" name="alamat_skrng" placeholder="Alamat Anda saat ini">{{$detail->alamat_skrng}}</textarea>
                   </div>
                   <div class="col-md-6">
                      <label for="alamat_asal">Alamat Asal</label>
-                     <textarea class="form-control"  id="alamat_asal" name="alamat_asal" placeholder="Alamat Anda sebelumnya" readonly>{{$detail->alamat_asal}}</textarea>
+                     <textarea class="form-control"  id="alamat_asal" name="alamat_asal" placeholder="Alamat Anda sebelumnya">{{$detail->alamat_asal}}</textarea>
                   </div>
                   <div class="col-md-6">
                      <label for="riwayat_penyakit">Riwayat Penyakit</label>
-                     <textarea class="form-control"  id="riwayat_penyakit" name="riwayat_penyakit" placeholder="Penyakit yang pernah di derita" readonly>{{$detail->riwayat_penyakit}}</textarea>
+                     <textarea class="form-control"  id="riwayat_penyakit" name="riwayat_penyakit" placeholder="Penyakit yang pernah di derita" >{{$detail->riwayat_penyakit}}</textarea>
                   </div>
                   <div class="col-md-6">
                     <label for="sosmed">Sosial Media</label>
-                    <textarea class="form-control"  id="sosmed" name="sosmed" placeholder="Sosial media yang Anda miliki" readonly>{{$detail->sosmed}}</textarea>
+                    <textarea class="form-control"  id="sosmed" name="sosmed" placeholder="Sosial media yang Anda miliki" >{{$detail->sosmed}}</textarea>
                     </div>
                   <div class="col-md-6">
                      <label for="goldar">Golongan Darah</label>
-                     <select class="form-select" aria-label="Default select example" name="goldar" disabled>
+                     <select class="form-select" aria-label="Default select example" name="goldar">
                         @if ($detail->goldar == 1)
                            <option value="1" selected>A</option>
                            <option value="2">B</option>
@@ -121,23 +127,23 @@
                   </div>
                   <div class="col-md-6">
                      <label for="suku">Suku</label>
-                     <input type="text" class="form-control" id="suku" name="suku" value="{{$detail->suku}}" placeholder="Suku Bangsa Anda" readonly>
+                     <input type="text" class="form-control" id="suku" name="suku" value="{{$detail->suku}}" placeholder="Suku Bangsa Anda">
                   </div>
                   <div class="col-md-6">
                     <label for="anak_ke">Anak ke-</label>
-                    <input type="text" class="form-control" id="anak_ke" name="anak_ke" value="{{$detail->anak_ke}}" placeholder="Anda anak-ke" readonly>
+                    <input type="text" class="form-control" id="anak_ke" name="anak_ke" value="{{$detail->anak_ke}}" placeholder="Anda anak-ke">
                  </div>
                  <div class="col-md-6">
                     <label for="jumlah_saudara">Jumlah Saudara</label>
-                    <input type="text" class="form-control" id="jumlah_saudara" name="jumlah_saudara" value="{{$detail->jumlah_saudara}}" placeholder="Jumlah saudara Anda" readonly>
+                    <input type="text" class="form-control" id="jumlah_saudara" name="jumlah_saudara" value="{{$detail->jumlah_saudara}}" placeholder="Jumlah saudara Anda">
                  </div>
                  <div class="col-md-6">
                     <label for="orang_tua">Orang Tua</label>
-                    <input type="text" class="form-control" id="orang_tua" name="orang_tua" value="{{$detail->orang_tua}}" placeholder="Nama orang tua Anda" readonly>
+                    <input type="text" class="form-control" id="orang_tua" name="orang_tua" value="{{$detail->orang_tua}}" placeholder="Nama orang tua Anda">
                  </div>
                  <div class="col-md-6">
                     <label for="level_ukt">Level UKT</label>
-                    <select class="form-select" aria-label="Default select example" name="level_ukt" disabled>
+                    <select class="form-select" aria-label="Default select example" name="level_ukt">
                      @if ($detail->level_ukt == 1)
                         <option value="1" selected>Level 1</option>
                         <option value="2">Level 2</option>
@@ -163,31 +169,31 @@
                  </div>
                   <div class="col-md-6">
                      <label for="cita_cita">Cita-cita</label>
-                     <textarea class="form-control"  id="cita_cita" name="cita_cita" placeholder="Cita-cita Anda" readonly>{{$detail->cita_cita}}</textarea>    
+                     <textarea class="form-control"  id="cita_cita" name="cita_cita" placeholder="Cita-cita Anda">{{$detail->cita_cita}}</textarea>    
                   </div>
                   <div class="col-md-6">
                      <label for="hobi">Hobi</label>
-                     <textarea class="form-control"  id="hobi" name="hobi" placeholder="Hobi Anda" readonly>{{$detail->hobi}}</textarea>
+                     <textarea class="form-control"  id="hobi" name="hobi" placeholder="Hobi Anda" >{{$detail->hobi}}</textarea>
                   </div>
                   <div class="col-md-6">
-                     <label for="beasiswa">Beasiswa</label>
-                     <textarea class="form-control" id="beasiswa" name="beasiswa" placeholder="Beasiswa yang pernah diterima" readonly>{{$detail->beasiswa}}</textarea>
-                  </div>
-                  <div class="col-md-6">
-                     <label for="prestasi">Prestasi</label>
-                     <textarea class="form-control"  id="prestasi" name="prestasi" placeholder="Prestasi yang pernah didapat" readonly>{{$detail->prestasi}}</textarea>
-                    </div>
-                    <div class="col-md-6">
-                     <label for="organisasi">Pengalaman Organisasi</label>
-                     <textarea class="form-control" id="organisasi" name="organisasi" placeholder="Pengalaman organisasi Anda selama kuliah" readonly>{{$detail->organisasi}}</textarea>
-                    </div>
+                    <label for="beasiswa">Beasiswa</label>
+                    <textarea class="form-control" id="beasiswa" name="beasiswa" placeholder="Beasiswa yang pernah diterima">{{$detail->beasiswa}}</textarea>
+                 </div>
+                 <div class="col-md-6">
+                  <label for="prestasi">Prestasi</label>
+                  <textarea class="form-control"  id="prestasi" name="prestasi" placeholder="Prestasi yang pernah didapat">{{$detail->prestasi}}</textarea>
+                 </div>
+                 <div class="col-md-6">
+                  <label for="organisasi">Pengalaman Organisasi</label>
+                  <textarea class="form-control" id="organisasi" name="organisasi" placeholder="Pengalaman organisasi Anda selama kuliah">{{$detail->organisasi}}</textarea>
+                 </div>
                  <div class="col-md-6">
                     <label for="bisnis">Bisnis</label>
-                    <textarea class="form-control"  id="bisnis" name="bisnis" placeholder="Bisnis yang Anda jalankan" readonly>{{$detail->bisnis}}</textarea>
+                    <textarea class="form-control"  id="bisnis" name="bisnis" placeholder="Bisnis yang Anda jalankan">{{$detail->bisnis}}</textarea>
                  </div>
                  <div class="col-md-6">
                     <label for="status_mentoring">Status Mentoring</label>
-                    <select class="form-select" aria-label="Default select example" name="status_mentoring" disabled>
+                    <select class="form-select" aria-label="Default select example" name="status_mentoring">
                      @if ($detail->status_mentoring == 1)
                         <option value="1" selected>Lulus</option>
                         <option value="2">Belum Lulus</option>
@@ -196,15 +202,16 @@
                         <option value="2" selected>Belum Lulus</option>   
                      @endif
                    </select>
+                   
                  </div>
                  <div class="col-md-6">
                     <label for="jabatan">Jabatan</label>
-                    <input type="text" class="form-control" id="jabatan" name="jabatan" value="{{$detail->jabatan}}" placeholder="Jabatan Anda" readonly>
+                    <input type="text" class="form-control" id="jabatan" name="jabatan" value="{{$detail->jabatan}}" placeholder="Jabatan Anda">
                  </div>
                </div>
                <div class="col-12">
-                  <a href="/pengurus/detail/updatepengurus/{{ $detail->id_pengurus}}" class="btn btn-primary">Update</a>
-                  <a href="/pengurus/{{ $detail->id_kepengurusan}}" class="btn btn-warning">Kembali</a>
+                  <button type="submit" class="btn btn-primary">Simpan</button>
+                  <a href="/profil" class="btn btn-warning">Kembali</a>
                </div>
                </div>
             </form>

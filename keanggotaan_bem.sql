@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3308
--- Generation Time: Dec 13, 2021 at 08:53 PM
--- Server version: 10.4.17-MariaDB
--- PHP Version: 8.0.2
+-- Host: 127.0.0.1
+-- Waktu pembuatan: 30 Des 2021 pada 10.43
+-- Versi server: 10.4.22-MariaDB
+-- Versi PHP: 8.0.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `dinas_biro`
+-- Struktur dari tabel `dinas_biro`
 --
 
 CREATE TABLE `dinas_biro` (
@@ -34,7 +34,7 @@ CREATE TABLE `dinas_biro` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `dinas_biro`
+-- Dumping data untuk tabel `dinas_biro`
 --
 
 INSERT INTO `dinas_biro` (`id_dinasbiro`, `id_kepengurusan`, `nama_dinasbiro`) VALUES
@@ -55,7 +55,7 @@ INSERT INTO `dinas_biro` (`id_dinasbiro`, `id_kepengurusan`, `nama_dinasbiro`) V
 -- --------------------------------------------------------
 
 --
--- Table structure for table `failed_jobs`
+-- Struktur dari tabel `failed_jobs`
 --
 
 CREATE TABLE `failed_jobs` (
@@ -71,7 +71,7 @@ CREATE TABLE `failed_jobs` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `kepengurusan`
+-- Struktur dari tabel `kepengurusan`
 --
 
 CREATE TABLE `kepengurusan` (
@@ -83,18 +83,19 @@ CREATE TABLE `kepengurusan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `kepengurusan`
+-- Dumping data untuk tabel `kepengurusan`
 --
 
 INSERT INTO `kepengurusan` (`id_kepengurusan`, `nama_kabinet`, `periode`, `status_kepengurusan`, `logo_kabinet`) VALUES
-(1, 'GEMA', '2019', 0, NULL),
-(3, 'Start Up', '2021', 0, NULL),
-(4, 'Cakrawala', '2022', 1, NULL);
+(1, 'GEMA', '2019', 0, 'navigasi.jpg'),
+(3, 'Start Up', '2021', 0, 'profile.png'),
+(4, 'Cakrawala', '2022', 1, 'start-up.jpeg'),
+(7, 'start-up', '2020', 0, 'WhatsApp Image 2021-09-26 at 10.06.59.jpeg');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `migrations`
+-- Struktur dari tabel `migrations`
 --
 
 CREATE TABLE `migrations` (
@@ -104,7 +105,7 @@ CREATE TABLE `migrations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `migrations`
+-- Dumping data untuk tabel `migrations`
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
@@ -120,7 +121,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `password_resets`
+-- Struktur dari tabel `password_resets`
 --
 
 CREATE TABLE `password_resets` (
@@ -132,7 +133,7 @@ CREATE TABLE `password_resets` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pendaftaran`
+-- Struktur dari tabel `pendaftaran`
 --
 
 CREATE TABLE `pendaftaran` (
@@ -152,39 +153,63 @@ CREATE TABLE `pendaftaran` (
   `kelebihan` varchar(255) NOT NULL,
   `kekurangan` varchar(255) NOT NULL,
   `motivasi` varchar(255) NOT NULL,
-  `id_pilihan_1` int(11) NOT NULL,
-  `alasan_pil_1` varchar(255) NOT NULL,
-  `id_pilihan_2` int(11) NOT NULL,
-  `alasan_pil_2` varchar(255) NOT NULL,
   `surat_pernyataan` varchar(255) NOT NULL,
   `status_kelulusan` int(11) NOT NULL,
   `tahun_daftar` year(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `pendaftaran`
+-- Dumping data untuk tabel `pendaftaran`
 --
 
-INSERT INTO `pendaftaran` (`id_pendaftaran`, `id_kepengurusan`, `nama`, `nim`, `jurusan`, `email`, `no_hp`, `tempat_lahir`, `tgl_lahir`, `transkrip_nilai`, `krs`, `foto`, `motto`, `kelebihan`, `kekurangan`, `motivasi`, `id_pilihan_1`, `alasan_pil_1`, `id_pilihan_2`, `alasan_pil_2`, `surat_pernyataan`, `status_kelulusan`, `tahun_daftar`) VALUES
-(1, 4, 'Latifatuzikra Suhairi', '1911522005', 2, 'latifatuzikra@gmail.com', '08126783993', 'Padang', '2001-02-09', '1911522005_LatifatuzikraSuhairi_TranskripNilai.pdf-1639424577-pdf', '1911522005_LatifatuzikraSuhairi_KRS.pdf-1639424577-pdf', '1911522005_LatifatuzikraSuhairi_KRS.pdf-1639424577-jpg', 'YOLO', 'Baik Hati', 'Perfeksionis', 'Ingin menambah isi CV', 11, 'Mau', 7, 'Mau', '1911522005_LatifatuzikraSuhairi_KK.pdf-1639424577-pdf', 0, 2021),
-(2, 4, 'William Wahyu', '1911523005', 2, 'william@gmail.com', '0821368851932', 'Padang', '2001-11-02', '1911522005_LatifatuzikraSuhairi_TranskripNilai.pdf-1639425018-pdf', '1911522005_LatifatuzikraSuhairi_KRS.pdf-1639425018-pdf', '1911522005_LatifatuzikraSuhairi_KRS.pdf-1639425018-jpg', 'YOI', 'Rajin', 'Pemalas', 'Menambah CV', 5, 'Memajukan SDM FTI', 8, 'Menjaga hubungan sosmas', '1911522005_LatifatuzikraSuhairi_KK.pdf-1639425018-pdf', 0, 2021);
+INSERT INTO `pendaftaran` (`id_pendaftaran`, `id_kepengurusan`, `nama`, `nim`, `jurusan`, `email`, `no_hp`, `tempat_lahir`, `tgl_lahir`, `transkrip_nilai`, `krs`, `foto`, `motto`, `kelebihan`, `kekurangan`, `motivasi`, `surat_pernyataan`, `status_kelulusan`, `tahun_daftar`) VALUES
+(21001, 4, 'Latifatuzikra Suhairi', '1911522005', 2, 'latifatuzikra@gmail.com', '08126783993', 'Padang', '2001-10-09', '1911522005_LatifatuzikraSuhairi_TranskripNilai.pdf-1640030953-pdf', '1911522005_LatifatuzikraSuhairi_KRS.pdf-1640030953-pdf', '1911522005_LatifatuzikraSuhairi_KRS.pdf-1640030953-jpg', 'YOLO', 'Pekerja keras', 'Perfeksionis', 'Membenahi BEM', '1911522005_LatifatuzikraSuhairi_Surat Pernyataan.pdf-1640030953-pdf', 1, 2021),
+(21002, 4, 'Laila Rahmatul Aufa', '1911523005', 2, 'laila@gmail.com', '08126783991', 'Padang', '2001-12-21', '1911522005_LatifatuzikraSuhairi_TranskripNilai.pdf-1640043040-pdf', '1911522005_LatifatuzikraSuhairi_KRS.pdf-1640043040-pdf', '1911522005_LatifatuzikraSuhairi_KRS.pdf-1640043040-jpg', 'YOI', 'Rajin', 'Perfeksionis', 'Mengasah kemampuan', '1911522005_LatifatuzikraSuhairi_Surat Pernyataan.pdf-1640043040-pdf', 1, 2021);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pengurus`
+-- Struktur dari tabel `pengurus`
 --
 
 CREATE TABLE `pengurus` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `id_pengurus` int(11) NOT NULL,
+  `id_pendaftaran` int(11) NOT NULL,
+  `id_dinasbiro` int(11) NOT NULL,
+  `alamat_skrng` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `alamat_asal` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `goldar` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `riwayat_penyakit` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `suku` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `anak_ke` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `jumlah_saudara` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `sosmed` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `orang_tua` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `level_ukt` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cita_cita` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `hobi` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `prestasi` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `organisasi` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `beasiswa` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `bisnis` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status_mentoring` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `jabatan` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `role` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `pengurus`
+--
+
+INSERT INTO `pengurus` (`id_pengurus`, `id_pendaftaran`, `id_dinasbiro`, `alamat_skrng`, `alamat_asal`, `goldar`, `riwayat_penyakit`, `suku`, `anak_ke`, `jumlah_saudara`, `sosmed`, `orang_tua`, `level_ukt`, `cita_cita`, `hobi`, `prestasi`, `organisasi`, `beasiswa`, `bisnis`, `status_mentoring`, `jabatan`, `password`, `role`) VALUES
+(17, 21001, 4, 'jl jaya', 'jl saaa', '1', 'tidak ada', 'Minang', '1 (satu)', '1 (satu)', 'ig @latifa', 'Saaa', '3', 'Programmer', 'Mendaki', 'Juara 2 Lomba essay nasional', 'Belum ada', 'Tidak ada', 'Belum ada', '2', 'Sekretaris bidang', '$2y$10$VtsnXUFKxWoJIPUR0AaCLuRS80tiPTAVFgoYucyBzafe25.wM9Wb2', ''),
+(18, 21002, 3, 'jl sinaga', 'jl bayangan', '2', 'Tidak ada', 'Minang', '4 (empat)', '4 (empat)', 'ig @lailaaa', 'Darman', '3', 'Sistem Analis', 'Berenang', 'Juara 1 Lomba Berenang', 'Anggota BEM 2021', 'Beasiswa BNI', 'Belum ada', '1', 'Sekretaris', '$2y$10$3.vLD7IvarW3oiXl0vJup.exE1qG7alARTJoN3L/mttBb8W3333Q6', 'pengurus');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `personal_access_tokens`
+-- Struktur dari tabel `personal_access_tokens`
 --
 
 CREATE TABLE `personal_access_tokens` (
@@ -202,7 +227,30 @@ CREATE TABLE `personal_access_tokens` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Struktur dari tabel `pilihan_daftar`
+--
+
+CREATE TABLE `pilihan_daftar` (
+  `id_pilihan_dinas_biro` int(11) NOT NULL,
+  `id_pendaftaran` int(11) NOT NULL,
+  `id_pilihan` int(11) NOT NULL,
+  `alasan_pil` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `pilihan_daftar`
+--
+
+INSERT INTO `pilihan_daftar` (`id_pilihan_dinas_biro`, `id_pendaftaran`, `id_pilihan`, `alasan_pil`) VALUES
+(9, 21001, 6, 'Menyejahterakan mahasiswa'),
+(10, 21001, 5, 'Mengembangkan SDM FTI'),
+(11, 21002, 7, 'Menjaga Hubungan Masayaratkat Internal dan Eksternal FTI'),
+(12, 21002, 3, 'Mengembangkan SDM FTI');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `users`
 --
 
 CREATE TABLE `users` (
@@ -221,52 +269,54 @@ CREATE TABLE `users` (
 --
 
 --
--- Indexes for table `dinas_biro`
+-- Indeks untuk tabel `dinas_biro`
 --
 ALTER TABLE `dinas_biro`
   ADD PRIMARY KEY (`id_dinasbiro`),
   ADD KEY `dinas_biro_kepengurusan` (`id_kepengurusan`);
 
 --
--- Indexes for table `failed_jobs`
+-- Indeks untuk tabel `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
 
 --
--- Indexes for table `kepengurusan`
+-- Indeks untuk tabel `kepengurusan`
 --
 ALTER TABLE `kepengurusan`
   ADD PRIMARY KEY (`id_kepengurusan`);
 
 --
--- Indexes for table `migrations`
+-- Indeks untuk tabel `migrations`
 --
 ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `password_resets`
+-- Indeks untuk tabel `password_resets`
 --
 ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
 
 --
--- Indexes for table `pendaftaran`
+-- Indeks untuk tabel `pendaftaran`
 --
 ALTER TABLE `pendaftaran`
   ADD PRIMARY KEY (`id_pendaftaran`),
   ADD KEY `pendaftaran_kepengurusan` (`id_kepengurusan`);
 
 --
--- Indexes for table `pengurus`
+-- Indeks untuk tabel `pengurus`
 --
 ALTER TABLE `pengurus`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id_pengurus`),
+  ADD KEY `pendaftaran_pengurus` (`id_pendaftaran`),
+  ADD KEY `dinasbiro_pengurus` (`id_dinasbiro`);
 
 --
--- Indexes for table `personal_access_tokens`
+-- Indeks untuk tabel `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
   ADD PRIMARY KEY (`id`),
@@ -274,79 +324,101 @@ ALTER TABLE `personal_access_tokens`
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
 
 --
--- Indexes for table `users`
+-- Indeks untuk tabel `pilihan_daftar`
+--
+ALTER TABLE `pilihan_daftar`
+  ADD PRIMARY KEY (`id_pilihan_dinas_biro`),
+  ADD KEY `pilihan_daftar_dinas_biro` (`id_pilihan`),
+  ADD KEY `pendaftaran_pilihan_daftar` (`id_pendaftaran`);
+
+--
+-- Indeks untuk tabel `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `dinas_biro`
+-- AUTO_INCREMENT untuk tabel `dinas_biro`
 --
 ALTER TABLE `dinas_biro`
   MODIFY `id_dinasbiro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT for table `failed_jobs`
+-- AUTO_INCREMENT untuk tabel `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `kepengurusan`
+-- AUTO_INCREMENT untuk tabel `kepengurusan`
 --
 ALTER TABLE `kepengurusan`
-  MODIFY `id_kepengurusan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_kepengurusan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT for table `migrations`
+-- AUTO_INCREMENT untuk tabel `migrations`
 --
 ALTER TABLE `migrations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT for table `pendaftaran`
---
-ALTER TABLE `pendaftaran`
-  MODIFY `id_pendaftaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `pengurus`
+-- AUTO_INCREMENT untuk tabel `pengurus`
 --
 ALTER TABLE `pengurus`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pengurus` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
--- AUTO_INCREMENT for table `personal_access_tokens`
+-- AUTO_INCREMENT untuk tabel `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT untuk tabel `pilihan_daftar`
+--
+ALTER TABLE `pilihan_daftar`
+  MODIFY `id_pilihan_dinas_biro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- Constraints for dumped tables
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
 
 --
--- Constraints for table `dinas_biro`
+-- Ketidakleluasaan untuk tabel `dinas_biro`
 --
 ALTER TABLE `dinas_biro`
   ADD CONSTRAINT `dinas_biro_kepengurusan` FOREIGN KEY (`id_kepengurusan`) REFERENCES `kepengurusan` (`id_kepengurusan`);
 
 --
--- Constraints for table `pendaftaran`
+-- Ketidakleluasaan untuk tabel `pendaftaran`
 --
 ALTER TABLE `pendaftaran`
   ADD CONSTRAINT `pendaftaran_kepengurusan` FOREIGN KEY (`id_kepengurusan`) REFERENCES `kepengurusan` (`id_kepengurusan`);
+
+--
+-- Ketidakleluasaan untuk tabel `pengurus`
+--
+ALTER TABLE `pengurus`
+  ADD CONSTRAINT `dinasbiro_pengurus` FOREIGN KEY (`id_dinasbiro`) REFERENCES `dinas_biro` (`id_dinasbiro`),
+  ADD CONSTRAINT `pendaftaran_pengurus` FOREIGN KEY (`id_pendaftaran`) REFERENCES `pendaftaran` (`id_pendaftaran`);
+
+--
+-- Ketidakleluasaan untuk tabel `pilihan_daftar`
+--
+ALTER TABLE `pilihan_daftar`
+  ADD CONSTRAINT `pendaftaran_pilihan_daftar` FOREIGN KEY (`id_pendaftaran`) REFERENCES `pendaftaran` (`id_pendaftaran`),
+  ADD CONSTRAINT `pilihan_daftar_dinas_biro` FOREIGN KEY (`id_pilihan`) REFERENCES `dinas_biro` (`id_dinasbiro`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
