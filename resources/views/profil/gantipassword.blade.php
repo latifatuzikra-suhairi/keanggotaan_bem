@@ -57,7 +57,7 @@
         </div>
         
         <div class="card-body">
-            <form action="{{ route('set-password')}}" method="post">
+            <form action="{{ route('set-password')}}" method="post" onsubmit="return confirm('Yakin akan ganti password?')">
                @csrf
                <div class="form-group">
                      <label for="password_lama" class="form-label">Password Lama</label><br>
