@@ -48,25 +48,29 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </div>
             
             <div class="card-body">
-                <form action="{{route('simpan-kepengurusan')}}" method="post" enctype="multipart/form-data">
+                <form  method="post" action="/update-kepengurusan/{{$editkp->id_kepengurusan}}" enctype="multipart/form-data"  onsubmit="return confirm('Yakin update data?')">
                     {{ csrf_field()}}
                     <div class="form-group">
                         <label for="nama_kabinet" class="form-label">Nama Kabinet</label><br>
-                        <input type="text" id="nama_kabinet" name="nama_kabinet" class="form-control" placeholder="Nama Kabinet" required>
+                        <input type="text" id="nama_kabinet" name="nama_kabinet" class="form-control" placeholder="Nama Kabinet" value="{{$editkp->nama_kabinet}}" required>
                     </div>
                     <div class="form-group">
                         <label for="periode" class="form-label">Periode Kepengurusan</label><br>
-                        <input type="text" id="periode" name="periode" class="form-control" placeholder="Periode Kepengurusan" required>
+                        <input type="text" id="periode" name="periode" class="form-control" placeholder="Periode Kepengurusan" value="{{$editkp->periode}}" required>
                     </div>
                     <div class="form-group">
                         <label for="status" class="form-label">Status Kepengurusan</label><br>
-                        <input type="radio" name="status" value="1" > Aktif  
+                        @if ($editkp->status_kepengurusan == 1)
+                        <input type="radio" name="status" value="1" checked> Aktif  
                         <input type="radio" name="status" value="0" > Tidak Aktif 
+                        @else
+                        <input type="radio" name="status" value="1"> Aktif  
+                        <input type="radio" name="status" value="0" checked> Tidak Aktif 
+                        @endif
                       </div>
                     <div class="form-group">
                         <label for="logo" class="form-label">Logo Kabinet</label><br>
-                        <img class="img-preview img-fluid">
-                        <input type="file" id="logo" name="logo" class="form-control" placeholder="Logo Kabinet" onchange="previewImage()">
+                        <input type="file" id="logo" name="logo" class="form-control" placeholder="Logo Kabinet" value="{{$editkp->logo_kabinet}}" >
                     </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-success">Simpan Data</button>
@@ -95,21 +99,5 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 <!-- REQUIRED SCRIPTS -->
 @include('dashboard.script')
-<script>
-  function previewImage(){
-    const image = document.querySelector('#logo');
-    const imgPreview = document.querySelector('.img-preview');
-
-    imgPreview.style.display = 'block';
-
-    const oFReader = new FileReader();
-    oFReader.readAsDataURL(logo.file[0]);
-
-    oFReader.onload = function(oFREvent){
-      imgPreview.src = oFREvent.target.result;
-    }
-  }
-  
-</script>
 </body>
 </html>

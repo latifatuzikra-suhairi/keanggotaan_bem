@@ -70,11 +70,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <div class="col-md-12 col-lg-6 col-xl-4">
                           <div class="card mb-2">
                             <img class="card-img-top" src="../img/logoBEM.png" alt="">
-                            <div class="card-img-overlay"><br><br><br><br>
-                              <br><br><br><br><br><br><br>
+                            <div class="card-img-overlay">
+                              <a href="/update-kepengurusan/{{ $item->id_kepengurusan}}" class="text-primary"><h3 class="card-title text-primary">Edit</h3><br></a><br><br><br><br>
                               
-                              <a href="/pengurus/{{ $item->id_pengurus}}" class="text-primary"><h3 class="card-title text-primary">{{$item->nama_kabinet}} {{$item->periode}} More...</h3><br></a>
-                             
+                              <br><br><br><br><br><br>
+                              <a href="/pengurus/{{ $item->id_kepengurusan}}" class="text-primary"><h3 class="card-title text-primary">{{$item->nama_kabinet}} {{$item->periode}} More...</h3><br></a>
+                              
                             </div>
                           </div>
                         </div>

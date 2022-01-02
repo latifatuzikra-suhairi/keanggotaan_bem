@@ -49,38 +49,34 @@ class KepengurusanController extends Controller
         return redirect('kepengurusan')->with('toast_success', 'Data Berhasil Tersimpan');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function getupdate($id_kepengurusan)
     {
-        //
+        $editkp = Kepengurusan:: select('id_kepengurusan', 'nama_kabinet', 'periode', 'status_kepengurusan', 'logo_kabinet')
+        ->where('id_kepengurusan', '=', $id_kepengurusan)
+        ->first();
+        //dd($detailPengurus);
+        return view('dashboard.updateKepengurusan', compact('editkp'));
+       
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function setUpdate(Request $request, $id_kepengurusan)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+        $file_name = $request->logo->getClientOriginalName();
+        $logo = $request->logo->move(public_path('logo'), $file_name);
+        
+        $update = Kepengurusan::where('id_kepengurusan', $id_kepengurusan)->update([
+            'nama_kabinet' => $request->nama_kabinet,
+            'periode' =>$request->periode,
+            'status_kepengurusan' =>$request->status,
+            'logo_kabinet' =>$file_name,
+        ]);
+        if($update == true){
+            return redirect('/kepengurusan')->with('toast_success', 'Update Berhasil Dilakukan');
+        }
+        else{
+            return redirect('/kepengurusan')->with('error', 'Update Gagal Dilakukan!');
+        }
+        //return redirect('kepengurusan')->with('toast_success', 'Data Berhasil Diubah');
     }
 
     /**

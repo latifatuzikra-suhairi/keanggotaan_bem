@@ -46,6 +46,10 @@ Route::get('/kepengurusan',[KepengurusanController::class, 'index'])->name('kepe
 Route::get('/tambah-kepengurusan',[KepengurusanController::class, 'create'])->name('tambah-kepengurusan');
 //simpan tambah-kepengurusan
 Route::post('/simpan-kepengurusan',[KepengurusanController::class, 'store'])->name('simpan-kepengurusan');
+//update-kepengurusan
+Route::get('/update-kepengurusan/{id_kepengurusan}',[KepengurusanController::class, 'getupdate'])->name('updateKepengurusan');
+//simpan update-kepengurusan
+Route::post('/update-kepengurusan/{id_kepengurusan}',[KepengurusanController::class, 'setUpdate'])->name('simpan-update-kepengurusan');
 //tampil pengurus
 Route::get('/pengurus/{id_kepengurusan}',[PengurusController::class, 'index'])->name('pengurus');
 //tampil detail pengurus
